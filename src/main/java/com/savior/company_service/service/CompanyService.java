@@ -19,8 +19,8 @@ public class CompanyService {
         this.companyDao = companyDao;
     }
 
-    public int insertCompany(Company company) {
-        return companyDao.insertCompany(company);
+    public void insertCompany(Company company) {
+        companyDao.insertCompany(company);
     }
 
     public List<Company> getAllCompanies() {
@@ -31,12 +31,12 @@ public class CompanyService {
         return companyDao.selectCompanyById(id);
     }
 
-    public int deleteCompany(UUID id) {
-        return companyDao.deleteCompanyById(id);
+    public void deleteCompany(UUID id) {
+        companyDao.deleteCompanyById(id);
     }
 
-    public int updateCompany(UUID id, Company newCompany) {
-        return companyDao.updateCompanyById(id, newCompany);
+    public void updateCompany(UUID id, Company newCompany) {
+        companyDao.updateCompanyById(id, newCompany);
     }
 
 }

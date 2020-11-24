@@ -1,13 +1,12 @@
 package com.savior.company_service.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.UUID;
 
 public class Company {
     private final UUID id;
-    private final String name;
-    private final String website;
+    private String name;
+    private String website;
 
     public Company(@JsonProperty("id") UUID id,
                    @JsonProperty("name") String name,
@@ -25,7 +24,15 @@ public class Company {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getWebsite() {
         return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 }

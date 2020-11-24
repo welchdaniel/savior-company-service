@@ -8,19 +8,14 @@ import java.util.UUID;
 
 public interface CompanyDao {
 
-    int insertCompany(UUID id, Company company);
-
-    default int insertCompany(Company company) {
-        UUID id = UUID.randomUUID();
-        return insertCompany(id, company);
-    }
+    void insertCompany(Company company);
 
     List<Company> selectAllCompanies();
 
     Optional<Company> selectCompanyById(UUID id);
 
-    int deleteCompanyById(UUID id);
+    void deleteCompanyById(UUID id);
 
-    int updateCompanyById(UUID id, Company company);
+    void updateCompanyById(UUID id, Company company);
 
 }
