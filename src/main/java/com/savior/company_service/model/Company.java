@@ -1,4 +1,4 @@
-package com.savior.companydatabaseservice.model;
+package com.savior.company_service.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

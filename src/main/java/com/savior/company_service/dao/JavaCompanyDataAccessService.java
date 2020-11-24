@@ -1,6 +1,6 @@
-package com.savior.companydatabaseservice.dao;
+package com.savior.company_service.dao;
 
-import com.savior.companydatabaseservice.model.Company;
+import com.savior.company_service.model.Company;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

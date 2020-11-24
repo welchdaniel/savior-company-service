@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.savior</groupId>
-	<artifactId>company-database-service</artifactId>
+	<artifactId>company-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>company-database-service</name>
+	<name>company-service</name>
 	<description>Savior Company Database Service</description>
 
 	<properties>

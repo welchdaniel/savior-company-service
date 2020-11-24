@@ -1,7 +1,7 @@
-package com.savior.companydatabaseservice.api;
+package com.savior.company_service.api;
 
-import com.savior.companydatabaseservice.model.Company;
-import com.savior.companydatabaseservice.service.CompanyService;
+import com.savior.company_service.model.Company;
+import com.savior.company_service.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

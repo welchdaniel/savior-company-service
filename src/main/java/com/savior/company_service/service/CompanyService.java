@@ -1,7 +1,7 @@
-package com.savior.companydatabaseservice.service;
+package com.savior.company_service.service;
 
-import com.savior.companydatabaseservice.dao.CompanyDao;
-import com.savior.companydatabaseservice.model.Company;
+import com.savior.company_service.dao.CompanyDao;
+import com.savior.company_service.model.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
