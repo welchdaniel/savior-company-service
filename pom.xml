@@ -12,7 +12,7 @@
 	<artifactId>company-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>company-service</name>
-	<description>Savior Company Database Service</description>
+	<description>Savior Company Service</description>
 
 	<properties>
 		<java.version>11</java.version>
