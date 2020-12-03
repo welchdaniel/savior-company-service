@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public interface CompanyRepository extends CrudRepository<Company, String> {
   @Query(value = "select * from company", nativeQuery = true)
-  public List<Company> findAllCompanies();
+  List<Company> findAllCompanies();
 
   @Query(value = "select * from company where id = :cid", nativeQuery = true)
-  public Optional<Company> findCompanyById(@Param("cid") String id);
+  Optional<Company> findCompanyById(@Param("cid") String id);
 }

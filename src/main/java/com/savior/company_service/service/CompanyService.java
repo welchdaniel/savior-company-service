@@ -2,6 +2,7 @@ package com.savior.company_service.service;
 
 import com.savior.company_service.dao.CompanyDao;
 import com.savior.company_service.model.Company;
+import com.savior.company_service.utils.exception.CompanyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,12 @@ public class CompanyService {
     return companyDao.selectAllCompanies();
   }
 
-  public Optional<Company> getCompanyById(String id) {
-    return companyDao.selectCompanyById(id);
+  public Company getCompanyById(String id) throws CompanyDoesNotExistException {
+    var storedCompany = companyDao.selectCompanyById(id);
+    if (storedCompany.isEmpty()) {
+      throw new CompanyDoesNotExistException();
+    }
+    return storedCompany.get();
   }
 
   public void deleteCompany(String id) {
