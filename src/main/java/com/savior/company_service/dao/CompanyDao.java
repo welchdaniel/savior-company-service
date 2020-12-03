@@ -4,7 +4,6 @@ import com.savior.company_service.model.Company;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface CompanyDao {
 
@@ -12,10 +11,10 @@ public interface CompanyDao {
 
     List<Company> selectAllCompanies();
 
-    Optional<Company> selectCompanyById(UUID id);
+    Optional<Company> selectCompanyById(String id);
 
-    void deleteCompanyById(UUID id);
+    void deleteCompanyById(String id);
 
-    void updateCompanyById(UUID id, Company company);
+    void updateCompanyById(String id, Company company);
 
 }

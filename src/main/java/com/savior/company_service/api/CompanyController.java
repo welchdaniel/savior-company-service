@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequestMapping("api/v1/company")
 @RestController
@@ -29,18 +28,18 @@ public class CompanyController {
     }
 
     @GetMapping(path = "/{id}")
-    public Company getCompanyById(@PathVariable("id") UUID id) {
+    public Company getCompanyById(@PathVariable("id") String id) {
         return companyService.getCompanyById(id)
                 .orElse(null);
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteCompanyById(@PathVariable("id") UUID id) {
+    public void deleteCompanyById(@PathVariable("id") String id) {
         companyService.deleteCompany(id);
     }
 
     @PutMapping(path = "{id}")
-    public void updateCompany(@PathVariable("id") UUID id, @RequestBody Company company) {
+    public void updateCompany(@PathVariable("id") String id, @RequestBody Company company) {
         companyService.updateCompany(id, company);
     }
 }

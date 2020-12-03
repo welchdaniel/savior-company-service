@@ -1,38 +1,54 @@
 package com.savior.company_service.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Company {
-    private final UUID id;
-    private String name;
-    private String website;
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+  @Column(name = "id", updatable = false, nullable = false, length = 36)
+  private String id;
 
-    public Company(@JsonProperty("id") UUID id,
-                   @JsonProperty("name") String name,
-                   @JsonProperty("website") String website) {
-        this.id = id;
-        this.name = name;
-        this.website = website;
-    }
+  private String name;
 
-    public UUID getId() {
-        return id;
-    }
+  private String website;
 
-    public String getName() {
-        return name;
-    }
+  public Company() {}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Company(@JsonProperty("id") String id, @JsonProperty("name") String name, @JsonProperty("website") String website) {
+    this.id = id;
+    this.name = name;
+    this.website = website;
+  }
 
-    public String getWebsite() {
-        return website;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setWebsite(String website) {
-        this.website = website;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getWebsite() {
+    return website;
+  }
+
+  public void setWebsite(String website) {
+    this.website = website;
+  }
 }

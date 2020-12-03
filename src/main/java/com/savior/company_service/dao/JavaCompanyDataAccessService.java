@@ -14,7 +14,7 @@ public class JavaCompanyDataAccessService implements CompanyDao {
 
     @Override
     public void insertCompany(Company company) {
-        DB.add(new Company(UUID.randomUUID(), company.getName(), company.getWebsite()));
+        DB.add(new Company(UUID.randomUUID().toString(), company.getName(), company.getWebsite()));
     }
 
     @Override
@@ -23,14 +23,14 @@ public class JavaCompanyDataAccessService implements CompanyDao {
     }
 
     @Override
-    public Optional<Company> selectCompanyById(UUID id) {
+    public Optional<Company> selectCompanyById(String id) {
         return DB.stream()
                 .filter(company -> company.getId().equals(id))
                 .findFirst();
     }
 
     @Override
-    public void deleteCompanyById(UUID id) {
+    public void deleteCompanyById(String id) {
         Optional<Company> maybeCompany = selectCompanyById(id);
         if(maybeCompany.isEmpty()) {
             return;
@@ -39,7 +39,7 @@ public class JavaCompanyDataAccessService implements CompanyDao {
     }
 
     @Override
-    public void updateCompanyById(UUID id, Company company) {
+    public void updateCompanyById(String id, Company company) {
         selectCompanyById(id)
                 .map(c -> {
                     int index = DB.indexOf(c);
