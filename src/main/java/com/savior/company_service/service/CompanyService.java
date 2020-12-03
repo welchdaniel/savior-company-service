@@ -11,31 +11,31 @@ import java.util.Optional;
 
 @Service
 public class CompanyService {
-    private final CompanyDao companyDao;
+  private final CompanyDao companyDao;
 
-    @Autowired
-    public CompanyService(@Qualifier("mysql") CompanyDao companyDao) {
-        this.companyDao = companyDao;
-    }
+  @Autowired
+  public CompanyService(@Qualifier("mysql") CompanyDao companyDao) {
+    this.companyDao = companyDao;
+  }
 
-    public void insertCompany(Company company) {
-        companyDao.insertCompany(company);
-    }
+  public void insertCompany(Company company) {
+    companyDao.insertCompany(company);
+  }
 
-    public List<Company> getAllCompanies() {
-        return companyDao.selectAllCompanies();
-    }
+  public List<Company> getAllCompanies() {
+    return companyDao.selectAllCompanies();
+  }
 
-    public Optional<Company> getCompanyById(String id) {
-        return companyDao.selectCompanyById(id);
-    }
+  public Optional<Company> getCompanyById(String id) {
+    return companyDao.selectCompanyById(id);
+  }
 
-    public void deleteCompany(String id) {
-        companyDao.deleteCompanyById(id);
-    }
+  public void deleteCompany(String id) {
+    companyDao.deleteCompanyById(id);
+  }
 
-    public void updateCompany(String id, Company newCompany) {
-        companyDao.updateCompanyById(id, newCompany);
-    }
+  public void updateCompany(String id, Company newCompany) {
+    companyDao.updateCompanyById(id, newCompany);
+  }
 
 }

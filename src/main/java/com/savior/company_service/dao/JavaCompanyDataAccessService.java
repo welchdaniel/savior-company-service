@@ -10,45 +10,45 @@ import java.util.UUID;
 
 @Repository("javaDao")
 public class JavaCompanyDataAccessService implements CompanyDao {
-    public static List<Company> DB = new ArrayList<>();
+  public static List<Company> DB = new ArrayList<>();
 
-    @Override
-    public void insertCompany(Company company) {
-        DB.add(new Company(UUID.randomUUID().toString(), company.getName(), company.getWebsite()));
-    }
+  @Override
+  public void insertCompany(Company company) {
+    DB.add(new Company(UUID.randomUUID().toString(), company.getName(), company.getWebsite()));
+  }
 
-    @Override
-    public List<Company> selectAllCompanies() {
-        return DB;
-    }
+  @Override
+  public List<Company> selectAllCompanies() {
+    return DB;
+  }
 
-    @Override
-    public Optional<Company> selectCompanyById(String id) {
-        return DB.stream()
-                .filter(company -> company.getId().equals(id))
-                .findFirst();
-    }
+  @Override
+  public Optional<Company> selectCompanyById(String id) {
+    return DB.stream()
+        .filter(company -> company.getId().equals(id))
+        .findFirst();
+  }
 
-    @Override
-    public void deleteCompanyById(String id) {
-        Optional<Company> maybeCompany = selectCompanyById(id);
-        if(maybeCompany.isEmpty()) {
-            return;
-        }
-        DB.remove(maybeCompany.get());
+  @Override
+  public void deleteCompanyById(String id) {
+    Optional<Company> maybeCompany = selectCompanyById(id);
+    if (maybeCompany.isEmpty()) {
+      return;
     }
+    DB.remove(maybeCompany.get());
+  }
 
-    @Override
-    public void updateCompanyById(String id, Company company) {
-        selectCompanyById(id)
-                .map(c -> {
-                    int index = DB.indexOf(c);
-                    if (index >= 0) {
-                        DB.set(index, new Company(id, company.getName(), company.getWebsite()));
-                        return 1;
-                    }
-                    return 0;
-                })
-                .orElse(0);
-    }
+  @Override
+  public void updateCompanyById(String id, Company company) {
+    selectCompanyById(id)
+        .map(c -> {
+          int index = DB.indexOf(c);
+          if (index >= 0) {
+            DB.set(index, new Company(id, company.getName(), company.getWebsite()));
+            return 1;
+          }
+          return 0;
+        })
+        .orElse(0);
+  }
 }

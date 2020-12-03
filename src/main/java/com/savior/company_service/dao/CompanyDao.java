@@ -7,14 +7,14 @@ import java.util.Optional;
 
 public interface CompanyDao {
 
-    void insertCompany(Company company);
+  void insertCompany(Company company);
 
-    List<Company> selectAllCompanies();
+  List<Company> selectAllCompanies();
 
-    Optional<Company> selectCompanyById(String id);
+  Optional<Company> selectCompanyById(String id);
 
-    void deleteCompanyById(String id);
+  void deleteCompanyById(String id);
 
-    void updateCompanyById(String id, Company company);
+  void updateCompanyById(String id, Company company);
 
 }
