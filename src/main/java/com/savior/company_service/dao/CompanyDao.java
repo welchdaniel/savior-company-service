@@ -4,7 +4,6 @@ import com.savior.company_service.model.Company;
 import com.savior.company_service.utils.exception.database.KeyDoesNotExistException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CompanyDao {
 
