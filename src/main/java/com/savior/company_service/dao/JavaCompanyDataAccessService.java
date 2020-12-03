@@ -1,6 +1,7 @@
 package com.savior.company_service.dao;
 
 import com.savior.company_service.model.Company;
+import com.savior.company_service.utils.exception.database.KeyDoesNotExistException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,13 +9,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository("javaDao")
+@Repository("java")
 public class JavaCompanyDataAccessService implements CompanyDao {
   public static List<Company> DB = new ArrayList<>();
 
   @Override
-  public void insertCompany(Company company) {
-    DB.add(new Company(UUID.randomUUID().toString(), company.getName(), company.getWebsite()));
+  public Company insertCompany(Company company) {
+    Company newCompany = new Company(UUID.randomUUID().toString(), company.getName(), company.getWebsite());
+    DB.add(newCompany);
+    return newCompany;
   }
 
   @Override
@@ -23,32 +26,28 @@ public class JavaCompanyDataAccessService implements CompanyDao {
   }
 
   @Override
-  public Optional<Company> selectCompanyById(String id) {
-    return DB.stream()
+  public Company selectCompanyById(String id) throws KeyDoesNotExistException {
+    Optional<Company> storedCompany = DB.stream()
         .filter(company -> company.getId().equals(id))
         .findFirst();
-  }
-
-  @Override
-  public void deleteCompanyById(String id) {
-    Optional<Company> maybeCompany = selectCompanyById(id);
-    if (maybeCompany.isEmpty()) {
-      return;
+    if (storedCompany.isEmpty()) {
+      throw new KeyDoesNotExistException();
     }
-    DB.remove(maybeCompany.get());
+    return storedCompany.get();
   }
 
   @Override
-  public void updateCompanyById(String id, Company company) {
-    selectCompanyById(id)
-        .map(c -> {
-          int index = DB.indexOf(c);
-          if (index >= 0) {
-            DB.set(index, new Company(id, company.getName(), company.getWebsite()));
-            return 1;
-          }
-          return 0;
-        })
-        .orElse(0);
+  public void deleteCompanyById(String id) throws KeyDoesNotExistException {
+    Company storedCompany = selectCompanyById(id);
+    DB.remove(storedCompany);
+  }
+
+  @Override
+  public Company updateCompanyById(String id, Company company) throws KeyDoesNotExistException {
+    Company storedCompany = selectCompanyById(id);
+    int index = DB.indexOf(storedCompany);
+    Company updatedCompany = new Company(id, company.getName(), company.getWebsite());
+    DB.set(index, updatedCompany);
+    return updatedCompany;
   }
 }

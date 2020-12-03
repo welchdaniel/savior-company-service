@@ -2,6 +2,7 @@ package com.savior.company_service.dao;
 
 import com.savior.company_service.model.Company;
 import com.savior.company_service.repository.CompanyRepository;
+import com.savior.company_service.utils.exception.database.KeyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,8 +16,8 @@ public class CompanyDataAccessService implements CompanyDao {
   private CompanyRepository companyRepository;
 
   @Override
-  public void insertCompany(Company company) {
-    companyRepository.save(company);
+  public Company insertCompany(Company company) {
+    return companyRepository.save(company);
   }
 
   @Override
@@ -25,21 +26,27 @@ public class CompanyDataAccessService implements CompanyDao {
   }
 
   @Override
-  public Optional<Company> selectCompanyById(String id) {
-    return companyRepository.findCompanyById(id);
+  public Company selectCompanyById(String id) throws KeyDoesNotExistException {
+    Optional<Company> storedCompany = companyRepository.findCompanyById(id);
+    if (storedCompany.isEmpty()) {
+      throw new KeyDoesNotExistException();
+    }
+    return storedCompany.get();
   }
 
   @Override
-  public void deleteCompanyById(String id) {
+  public void deleteCompanyById(String id) throws KeyDoesNotExistException {
+    if (!companyRepository.existsById(id)) {
+      throw new KeyDoesNotExistException();
+    }
     companyRepository.deleteById(id);
   }
 
   @Override
-  public void updateCompanyById(String id, Company company) {
-    Optional<Company> optional = companyRepository.findById(id);
-    Company updateCompany = optional.get();
+  public Company updateCompanyById(String id, Company company) throws KeyDoesNotExistException {
+    Company updateCompany = selectCompanyById(id);
     updateCompany.setName(company.getName());
     updateCompany.setWebsite(company.getWebsite());
-    companyRepository.save(updateCompany);
+    return companyRepository.save(updateCompany);
   }
 }

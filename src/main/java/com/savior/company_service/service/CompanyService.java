@@ -2,13 +2,13 @@ package com.savior.company_service.service;
 
 import com.savior.company_service.dao.CompanyDao;
 import com.savior.company_service.model.Company;
-import com.savior.company_service.utils.exception.CompanyDoesNotExistException;
+import com.savior.company_service.utils.exception.database.KeyDoesNotExistException;
+import com.savior.company_service.utils.exception.service.CompanyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -19,8 +19,8 @@ public class CompanyService {
     this.companyDao = companyDao;
   }
 
-  public void insertCompany(Company company) {
-    companyDao.insertCompany(company);
+  public Company insertCompany(Company company) {
+    return companyDao.insertCompany(company);
   }
 
   public List<Company> getAllCompanies() {
@@ -28,19 +28,27 @@ public class CompanyService {
   }
 
   public Company getCompanyById(String id) throws CompanyDoesNotExistException {
-    var storedCompany = companyDao.selectCompanyById(id);
-    if (storedCompany.isEmpty()) {
+    try {
+      return companyDao.selectCompanyById(id);
+    } catch (KeyDoesNotExistException kdne) {
       throw new CompanyDoesNotExistException();
     }
-    return storedCompany.get();
   }
 
-  public void deleteCompany(String id) {
-    companyDao.deleteCompanyById(id);
+  public void deleteCompany(String id) throws CompanyDoesNotExistException {
+    try {
+      companyDao.deleteCompanyById(id);
+    } catch (KeyDoesNotExistException kdne) {
+      throw new CompanyDoesNotExistException();
+    }
   }
 
-  public void updateCompany(String id, Company newCompany) {
-    companyDao.updateCompanyById(id, newCompany);
+  public Company updateCompany(String id, Company newCompany) throws CompanyDoesNotExistException {
+    try {
+      return companyDao.updateCompanyById(id, newCompany);
+    } catch (KeyDoesNotExistException kdne) {
+      throw new CompanyDoesNotExistException();
+    }
   }
 
 }

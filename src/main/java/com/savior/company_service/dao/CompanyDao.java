@@ -1,20 +1,21 @@
 package com.savior.company_service.dao;
 
 import com.savior.company_service.model.Company;
+import com.savior.company_service.utils.exception.database.KeyDoesNotExistException;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CompanyDao {
 
-  void insertCompany(Company company);
+  Company insertCompany(Company company);
 
   List<Company> selectAllCompanies();
 
-  Optional<Company> selectCompanyById(String id);
+  Company selectCompanyById(String id) throws KeyDoesNotExistException;
 
-  void deleteCompanyById(String id);
+  void deleteCompanyById(String id) throws KeyDoesNotExistException;
 
-  void updateCompanyById(String id, Company company);
+  Company updateCompanyById(String id, Company company) throws KeyDoesNotExistException;
 
 }
