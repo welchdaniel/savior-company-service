@@ -1,4 +1,4 @@
-package com.savior.company_service.utils.exception.database;
+package com.savior.company_service.utils.exception.data;
 
 import com.savior.company_service.utils.exception.SaviorBaseException;
 

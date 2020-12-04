@@ -1,8 +1,8 @@
 package com.savior.company_service.service;
 
-import com.savior.company_service.dao.CompanyDao;
+import com.savior.company_service.dao.Company.CompanyDao;
 import com.savior.company_service.model.Company;
-import com.savior.company_service.utils.exception.database.KeyDoesNotExistException;
+import com.savior.company_service.utils.exception.data.KeyDoesNotExistException;
 import com.savior.company_service.utils.exception.service.CompanyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class CompanyService {
+
   private final CompanyDao companyDao;
 
   @Autowired

@@ -1,8 +1,8 @@
-package com.savior.company_service.dao;
+package com.savior.company_service.dao.Company;
 
 import com.savior.company_service.model.Company;
 import com.savior.company_service.repository.CompanyRepository;
-import com.savior.company_service.utils.exception.database.KeyDoesNotExistException;
+import com.savior.company_service.utils.exception.data.KeyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,7 +36,7 @@ public class CompanyDataAccessService implements CompanyDao {
 
   @Override
   public void deleteCompanyById(String id) throws KeyDoesNotExistException {
-    if (!companyRepository.existsById(id)) {
+    if (!companyWithIdExists(id)) {
       throw new KeyDoesNotExistException();
     }
     companyRepository.deleteById(id);
@@ -48,5 +48,10 @@ public class CompanyDataAccessService implements CompanyDao {
     updateCompany.setName(company.getName());
     updateCompany.setWebsite(company.getWebsite());
     return companyRepository.save(updateCompany);
+  }
+
+  @Override
+  public boolean companyWithIdExists(String id) {
+    return companyRepository.existsById(id);
   }
 }

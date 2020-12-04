@@ -1,5 +1,7 @@
 package com.savior.company_service.api;
 
+import com.savior.company_service.model.Product;
+import com.savior.company_service.service.ProductService;
 import com.savior.company_service.utils.exception.service.CompanyDoesNotExistException;
 
 import com.savior.company_service.model.Company;
@@ -26,10 +28,20 @@ public class CompanyController {
   @Autowired
   private CompanyService companyService;
 
+  @Autowired
+  private ProductService productService;
+
   @PostMapping
-  public ResponseEntity insertCompany(@RequestBody Company company) {
+  public ResponseEntity createCompany(@RequestBody Company company) {
     Company storedCompany = companyService.insertCompany(company);
     return new ResponseEntity(storedCompany, HttpStatus.CREATED);
+  }
+
+  @PostMapping(path = "/{id}/product")
+  public ResponseEntity createProduct(@PathVariable("id") String companyId, @RequestBody Product product) {
+    // TODO: store product with company id
+    Product storedProduct = productService.insertProduct(product);
+    return new ResponseEntity(storedProduct, HttpStatus.CREATED);
   }
 
   @GetMapping
@@ -58,7 +70,7 @@ public class CompanyController {
     }
   }
 
-  @PutMapping(path = "{id}")
+  @PutMapping(path = "/{id}")
   public ResponseEntity updateCompany(@PathVariable("id") String id, @RequestBody Company company) {
     try {
       Company storedCompany = companyService.updateCompany(id, company);
