@@ -16,7 +16,7 @@ public class CompanyService {
   private final CompanyDao companyDao;
 
   @Autowired
-  public CompanyService(@Qualifier("mysql") CompanyDao companyDao) {
+  public CompanyService(@Qualifier("mysql-company") CompanyDao companyDao) {
     this.companyDao = companyDao;
   }
 

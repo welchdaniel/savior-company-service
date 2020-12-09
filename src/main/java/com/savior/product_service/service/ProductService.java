@@ -16,7 +16,7 @@ public class ProductService {
   private final ProductDao productDao;
 
   @Autowired
-  public ProductService(@Qualifier("mysql") ProductDao productDao) {
+  public ProductService(@Qualifier("mysql-product") ProductDao productDao) {
     this.productDao = productDao;
   }
 

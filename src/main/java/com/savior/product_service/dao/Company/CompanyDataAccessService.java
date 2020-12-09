@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("mysql")
+@Repository("mysql-company")
 public class CompanyDataAccessService implements CompanyDao {
 
   @Autowired
