@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.savior</groupId>
-	<artifactId>company-service</artifactId>
+	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>company-service</name>
-	<description>Savior Company Service</description>
+	<name>product-service</name>
+	<description>Savior Product Service</description>
 
 	<properties>
 		<java.version>11</java.version>
